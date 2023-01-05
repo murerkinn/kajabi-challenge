@@ -23,6 +23,7 @@ const EmployeeTable = ({ data, loading, total }: EmployeeTableProps) => {
         loading={loading}
         total={total}
         onChange={data => updateQuery(data as ParsedUrlQuery)}
+        searchFieldName="email"
         columns={[
           {
             key: 'id',

@@ -30,6 +30,7 @@ type Props<T> = TableProps<T> & {
   onChange?: (data: ParsedUrlQuery) => void
   selectedRows?: Key[]
   selectionActions?: JSX.Element
+  searchFieldName?: string
 }
 
 const BaseTable = <T extends object>({
@@ -38,10 +39,11 @@ const BaseTable = <T extends object>({
   loading,
   onChange,
   total,
+  searchFieldName = 'query',
   ...tableProps
 }: Props<T> & { children?: ReactNode }) => {
   const router = useRouter()
-  const [query, setQuery] = useState(router.query.query)
+  const [query, setQuery] = useState(router.query[searchFieldName])
   const [pageSize, setPageSize] = useState(Number(router.query.pageSize || 10))
   const [page, setPage] = useState(Number(router.query.page || 1))
 
@@ -129,8 +131,11 @@ const BaseTable = <T extends object>({
             <Input.Search
               value={query}
               onChange={e => setQuery(e.target.value)}
-              placeholder="Search with email"
-              onSearch={value => updateQuery({ query: value })}
+              placeholder="Search..."
+              onSearch={value => {
+                setPage(1)
+                updateQuery({ [searchFieldName]: value, page: '1' })
+              }}
             />
           </Col>
           <Col>
