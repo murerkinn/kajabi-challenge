@@ -1,0 +1,12 @@
+.ant-form {
+  &-vertical {
+    .ant-form-item-label {
+      padding: 0;
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  &-item {
+    margin-bottom: 2rem;
+  }
+}

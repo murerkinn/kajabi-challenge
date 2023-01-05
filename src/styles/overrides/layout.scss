@@ -1,0 +1,44 @@
+:root {
+  --sider-width: 24rem;
+}
+
+.ant-layout {
+  .ant-layout-has-sider {
+    height: 100%;
+  }
+
+  .ant-layout-sider {
+    background: #191632;
+  }
+
+  .ant-layout-header {
+    height: 6.4rem;
+    background: white;
+  }
+
+  .ant-layout-footer {
+    background-color: white;
+  }
+
+  .ant-layout-content {
+    padding: 2rem;
+
+    @media screen and (max-width: 768px) {
+      padding: 1rem;
+    }
+  }
+}
+
+.app-layout {
+  min-height: 100vh;
+
+  .ant-menu-item-icon {
+    .MuiSvgIcon-root {
+      font-size: 2.4rem;
+    }
+  }
+
+  .page-title {
+    margin-bottom: 2rem;
+  }
+}
