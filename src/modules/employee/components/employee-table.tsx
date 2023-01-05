@@ -1,6 +1,6 @@
 import Icon from '@ant-design/icons'
 import EditIcon from '@mui/icons-material/Edit'
-import { Button, Space, Typography } from 'antd'
+import { Avatar, Button, Space, Typography } from 'antd'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 
@@ -30,6 +30,15 @@ const EmployeeTable = ({ data, loading, total }: EmployeeTableProps) => {
             title: 'ID',
             render: (id: number) => (
               <Typography.Text copyable>{id}</Typography.Text>
+            ),
+          },
+          {
+            key: 'avatar',
+            dataIndex: 'avatar',
+            title: 'Avatar',
+            width: 64,
+            render: (avatar: string) => (
+              <Avatar src={avatar} shape="circle" size={48} />
             ),
           },
           {
