@@ -2,9 +2,9 @@ import { ParsedUrlQuery } from 'querystring'
 
 export default function decorateQuery(query: ParsedUrlQuery) {
   const params: { [key: string]: unknown } = {
-    page: 1,
-    per_page: query.pageSize || 10,
     ...query,
+    page: 1,
+    pageSize: query.pageSize || 10,
   }
 
   return params
