@@ -31,6 +31,8 @@ type Props<T> = TableProps<T> & {
   selectedRows?: Key[]
   selectionActions?: JSX.Element
   searchFieldName?: string
+  hideHeader?: boolean
+  hideFooter?: boolean
 }
 
 const BaseTable = <T extends object>({
@@ -40,6 +42,8 @@ const BaseTable = <T extends object>({
   onChange,
   total,
   searchFieldName = 'query',
+  hideHeader = false,
+  hideFooter = false,
   ...tableProps
 }: Props<T> & { children?: ReactNode }) => {
   const router = useRouter()
@@ -125,50 +129,56 @@ const BaseTable = <T extends object>({
         pageSize,
         current: page,
       }}
-      title={() => (
-        <Row gutter={[24, 24]} justify="space-between" align="middle">
-          <Col style={{ paddingLeft: 0 }}>
-            <Input.Search
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              placeholder="Search..."
-              onSearch={value => {
-                setPage(1)
-                updateQuery({ [searchFieldName]: value, page: '1' })
-              }}
-            />
-          </Col>
-          <Col>
-            <Pagination
-              currentPage={page}
-              pageSize={pageSize}
-              total={total || 0}
-              setCurrentPage={changePage}
-              setPageSize={changePageSize}
-            />
-          </Col>
-        </Row>
-      )}
-      footer={() => (
-        <Row justify="space-between" align="middle">
-          <Col>
-            {`Total ${total || 0} Results. Showing ${calculateShowingDataCount(
-              total || 0,
-              pageSize,
-              page
-            )}`}
-          </Col>
-          <Col>
-            <Pagination
-              currentPage={page}
-              pageSize={pageSize}
-              total={total || 0}
-              setCurrentPage={changePage}
-              setPageSize={changePageSize}
-            />
-          </Col>
-        </Row>
-      )}
+      title={() =>
+        hideHeader ? null : (
+          <Row gutter={[24, 24]} justify="space-between" align="middle">
+            <Col style={{ paddingLeft: 0 }}>
+              <Input.Search
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Search..."
+                onSearch={value => {
+                  setPage(1)
+                  updateQuery({ [searchFieldName]: value, page: '1' })
+                }}
+              />
+            </Col>
+            <Col>
+              <Pagination
+                currentPage={page}
+                pageSize={pageSize}
+                total={total || 0}
+                setCurrentPage={changePage}
+                setPageSize={changePageSize}
+              />
+            </Col>
+          </Row>
+        )
+      }
+      footer={() =>
+        hideFooter ? null : (
+          <Row justify="space-between" align="middle">
+            <Col>
+              {`Total ${
+                total || 0
+              } Results. Showing ${calculateShowingDataCount(
+                total || 0,
+                pageSize,
+                page
+              )}`}
+            </Col>
+            <Col>
+              <Pagination
+                currentPage={page}
+                pageSize={pageSize}
+                total={total || 0}
+                setCurrentPage={changePage}
+                setPageSize={changePageSize}
+              />
+            </Col>
+          </Row>
+        )
+      }
     />
   )
 }

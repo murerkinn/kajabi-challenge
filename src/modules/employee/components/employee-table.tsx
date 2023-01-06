@@ -13,9 +13,17 @@ type EmployeeTableProps = {
   data: Employee[]
   loading: boolean
   total: number
+  hideHeader?: boolean
+  hideFooter?: boolean
 }
 
-const EmployeeTable = ({ data, loading, total }: EmployeeTableProps) => {
+const EmployeeTable = ({
+  data,
+  loading,
+  total,
+  hideHeader,
+  hideFooter,
+}: EmployeeTableProps) => {
   return (
     <>
       <BaseTable
@@ -24,6 +32,8 @@ const EmployeeTable = ({ data, loading, total }: EmployeeTableProps) => {
         total={total}
         onChange={data => updateQuery(data as ParsedUrlQuery)}
         searchFieldName="email"
+        hideHeader={hideHeader}
+        hideFooter={hideFooter}
         columns={[
           {
             key: 'id',
