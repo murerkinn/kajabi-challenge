@@ -1,3 +1,29 @@
+# Challenge Description
+
+You’re starting up a new project to build an online employee directory for the company.
+There’s an existing API that can feed you the data that can be accessed at this URL:
+
+https://reqres.in/
+
+The goal is to be able to fetch the data from the api and display a list view, with a link to display a more detailed page with the employee’s information.
+Because the company is large, we’ll need to be sure we can paginate the list results and also search by email address to find that one specific person.
+
+This is a Greenfield exercise, and you’re in charge. Please choose your desired technology to make this happen. This does not have to be pretty, it is an exercise to learn how you would approach the problem, how you collaborate with our team members, how you accept feedback, and how you can explain the choices you’re making.
+
+If you’re doing this as a take-home exercise, we will have a meeting afterwards to have you walk through your code, the way it works, and how you came up with the solution. You can walk us through the repository and we will have a conversation about the implementation.
+
+There is only 1 rule. You cannot call the API directly from the frontend.
+
+Requirements:
+
+- Start a new repository with the desired tech stack
+- Implement a method of fetching the data from the API on the backend and serving to the frontend
+- Display a paginated list view of the results of employees
+- Provide a link to go to a page to display more details about a specific employee
+- Ensure that users can enter an email address to help narrow down the employee list closer to the person they are looking for
+
+# Generated Next.js README
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
