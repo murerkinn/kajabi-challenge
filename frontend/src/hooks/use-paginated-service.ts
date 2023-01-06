@@ -70,13 +70,13 @@ const usePaginatedService = (service: any, deps: any[] = []) => {
   }, [callService])
 
   return {
-    data: data ? data.data : [],
+    data: data ? data.docs : [],
     error,
     pagination: {
       current: data ? data.page : 1,
-      per_page: data ? data.per_page : 10,
-      total: data ? data.total : 0,
-      total_pages: data ? data.total_pages : 0,
+      per_page: data ? data.limit : 10,
+      total: data ? data.totalDocs : 0,
+      total_pages: data ? data.totalPages : 0,
     },
     loading,
   }

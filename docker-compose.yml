@@ -1,14 +1,31 @@
-version: '3'
+version: "3"
 
 services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: frontend
+      dockerfile: Dockerfile.local
     environment:
       - PORT=3000
     ports:
       - 3000:3000
     volumes:
-      - ./src:/app/src
-      - ./public:/app/public
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile.local
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongodb:27017/kajabi
+    ports:
+      - 4000:4000
+    volumes:
+      - ./backend/src:/app/src

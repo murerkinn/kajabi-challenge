@@ -27,7 +27,7 @@ const EmployeeTable = ({ data, loading, total }: EmployeeTableProps) => {
         columns={[
           {
             key: 'id',
-            dataIndex: 'id',
+            dataIndex: '_id',
             title: 'ID',
             render: (id: number) => (
               <Typography.Text copyable>{id}</Typography.Text>

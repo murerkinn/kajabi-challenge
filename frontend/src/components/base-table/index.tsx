@@ -115,7 +115,7 @@ const BaseTable = <T extends object>({
         onChange(normalizedData)
       }}
       className={cn('base-table', tableProps.className)}
-      rowKey="id"
+      rowKey="_id"
       scroll={{ x: 1300 }}
       dataSource={dataSource}
       columns={columns}
