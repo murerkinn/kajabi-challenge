@@ -18,12 +18,11 @@ export default async function handler(
     return
   }
 
-  const { data } = await ReqResAPI.get(`/users/${req.query.id}`)
+  try {
+    const { data } = await ReqResAPI.get(`/users/${req.query.id}`)
 
-  if (!data) {
+    res.status(200).json(data.data)
+  } catch (e) {
     res.status(404).json({ error: 'Not found' })
-    return
   }
-
-  res.status(200).json(data.data)
 }
