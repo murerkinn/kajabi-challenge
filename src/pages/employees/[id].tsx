@@ -1,21 +1,19 @@
 import Icon from '@ant-design/icons'
 import { ArrowBack } from '@mui/icons-material'
-import { Button, Card, Col, Row, Spin } from 'antd'
+import { Button, Card, Col, Row } from 'antd'
+import { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
 
-import useService from '@/hooks/use-service'
 import EmployeeForm from '@/modules/employee/components/employee-form'
 import EmployeeService from '@/modules/employee/service'
+import { Employee } from '@/modules/employee/types'
 
-const EmployeeDetailsPage = () => {
-  const { query } = useRouter()
+type EmployeeDetailsPageProps = {
+  employee?: Employee | null
+}
 
-  const { data, loading } = useService(
-    () => EmployeeService.getEmployeeById(query.id as string),
-    [query.id]
-  )
-
+const EmployeeDetailsPage = ({ employee = null }: EmployeeDetailsPageProps) => {
   return (
     <>
       <main>
@@ -32,15 +30,31 @@ const EmployeeDetailsPage = () => {
         <Row>
           <Col span={24}>
             <Card>
-              <Spin spinning={loading}>
-                <EmployeeForm data={data} />
-              </Spin>
+              <EmployeeForm data={employee} />
             </Card>
           </Col>
         </Row>
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { id } = ctx.params as ParsedUrlQuery
+
+  try {
+    const employee = await EmployeeService.getEmployeeById(id as string)
+
+    return {
+      props: {
+        employee,
+      },
+    }
+  } catch (e) {
+    return {
+      notFound: true,
+    }
+  }
 }
 
 export default EmployeeDetailsPage
