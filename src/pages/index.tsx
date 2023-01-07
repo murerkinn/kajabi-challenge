@@ -1,10 +1,24 @@
 import { Button, Card, Col, Row, Typography } from 'antd'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
+import usePaginatedService from '@/hooks/use-paginated-service'
 import StatisticCard from '@/modules/dashboard/components/statistic-card'
 import EmployeeTable from '@/modules/employee/components/employee-table'
+import EmployeeService from '@/modules/employee/service'
 
 const Home = () => {
+  const { query } = useRouter()
+
+  const {
+    data: employees,
+    loading: employeesLoading,
+    pagination: employeesPagination,
+  } = usePaginatedService(
+    () => EmployeeService.listEmployees({ ...query, pageSize: '5' }),
+    [query]
+  )
+
   return (
     <>
       <main>
@@ -55,9 +69,9 @@ const Home = () => {
               bodyStyle={{ padding: '0 2.4rem' }}
             >
               <EmployeeTable
-                data={[]}
-                loading={false}
-                total={0}
+                data={employees}
+                loading={employeesLoading}
+                total={employeesPagination.total}
                 hideHeader
                 hideFooter
               />
